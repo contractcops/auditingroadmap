@@ -1,4 +1,4 @@
-#What is ethereum?
+# What is ethereum?
 
 Ethereum is a deterministic, but unbounded state machine that consists of a global singleton state and a virual machine that applies changes to that state.
 
