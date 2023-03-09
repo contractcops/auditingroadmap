@@ -28,7 +28,7 @@ These are hard-coded constants representing hash values.
 ![buffer_initialization](../images/SHA-256/buffer_initialization.png)
 
 👉Moreover, we have to initialize an array containing 64 constants, denoted by k.
-![buffer_initialization1](../images/SHA-256/buffer_initialization1.png)
+![buffer_initializaiton_1](../images/SHA-256/buffer_initializaiton_1.png)
 
 <h2>Step three: Compression function</h2>
 Now that we have our message and buffers ready, we can begin computation.
