@@ -3,7 +3,7 @@
 
 👉The first step involves preprocessing the input message to make it compatible with the hash function. It can be divided into two main substeps:
 
-<h4> Padding bits <h4>
+<h2> Padding bits </h2>
 
 👉The total length of our message must be a multiple of 512. In this step, we append bits to the end of our message such that the final length of the message must be 64 bits less than a multiple of 512.
 The formula below depicts this step:
@@ -14,19 +14,23 @@ Where m = length of our message, p = length of the padding, n = is a constant
 
 The first bit that we append is 1 followed by all 0 bits.
 
-<h4> Length bits <h4>
+<h2> Length bits </h2>
 👉Next, we take the modulus of the original message with 2^32 to get 64 bits of data. Appending this to the padded message makes our processed message and exact multiple of 512
 
 ![length_bits](../images/SHA-256/length_bits.png)
 
-👉<h4>Step two: Buffer initialization</h4>
-Before we begin carrying out computations on the message, we need to initialize some buffer values. The default eight buffer values are shown below. These are hard-coded constants representing hash values.
+<h2>Step two: Buffer initialization</h2>
+Before we begin carrying out computations on the message, we need to initialize some buffer values.
+
+The default eight buffer values are shown below.
+
+These are hard-coded constants representing hash values.
 ![buffer_initialization](../images/SHA-256/buffer_initialization.png)
 
 👉Moreover, we have to initialize an array containing 64 constants, denoted by k.
 ![buffer_initializaiton_1](../images/SHA-256/buffer_initialization1.png)
 
-👉<h4>Step three: Compression function</h4>
+<h2>Step three: Compression function</h2>
 Now that we have our message and buffers ready, we can begin computation.
 Recall that our processed message is n*512 bits long.
 This will be divided into n chunks of 512 bits. Each of these chunks is then put trough 64 rounds of operations and the output from each round serves as the next input
