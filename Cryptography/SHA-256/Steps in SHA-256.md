@@ -1,5 +1,5 @@
 # What are the different steps in SHA-256?
-<h2> Step one: Appending bits <h2>
+<h2> Step one: Appending bits </h2>
 
 👉The first step involves preprocessing the input message to make it compatible with the hash function. It can be divided into two main substeps:
 
@@ -20,20 +20,23 @@ The first bit that we append is 1 followed by all 0 bits.
 ![length_bits](../images/SHA-256/length_bits.png)
 
 <h2>Step two: Buffer initialization</h2>
-Before we begin carrying out computations on the message, we need to initialize some buffer values.
+👉Before we begin carrying out computations on the message, we need to initialize some buffer values.
 
 The default eight buffer values are shown below.
-
 These are hard-coded constants representing hash values.
+
 ![buffer_initialization](../images/SHA-256/buffer_initialization.png)
 
 👉Moreover, we have to initialize an array containing 64 constants, denoted by k.
 ![buffer_initializaiton_1](../images/SHA-256/buffer_initializaiton_1.png)
 
 <h2>Step three: Compression function</h2>
-Now that we have our message and buffers ready, we can begin computation.
+👉Now that we have our message and buffers ready, we can begin computation.
 Recall that our processed message is n*512 bits long.
-This will be divided into n chunks of 512 bits. Each of these chunks is then put trough 64 rounds of operations and the output from each round serves as the next input
+This will be divided into n chunks of 512 bits.
+
+👉Each of these chunks is then put trough 64 rounds of operations and the output from each round serves as the next input
+
 ![compression_funciton](../images/SHA-256/compression_funciton.png)
 
 👉Moreover, each input consists of two constants - K(i) and W(i). K(i) is preinitialized and W(i) is initialized by breaking each of the 512 bit chunks into 16 sunblock of 32 bits each for the first 16 rounds. After that, W(i) must be calculated at each subsequent round
