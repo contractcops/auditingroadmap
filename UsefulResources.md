@@ -9,3 +9,4 @@ http://leveldb.org
 • Ethash PoW algorithm: https://github.com/ethereum/wiki/wiki/Ethash
 • Casper PoS v1 Implementation Guide: http://bit.ly/2DyPr3l
 • Go-Ethereum (Geth) client: https://geth.ethereum.org/
+• Scaling and layer 2 solutions: https://ethereum.org/en/developers/docs/scaling/
