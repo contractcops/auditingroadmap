@@ -6,7 +6,6 @@
 
 A block on the Ethereum blockchain comprises of block headers and transactions. The state, transactions and the receipt header fields have pointers to the root hash.
 
-
 > A diagram explaining the connection between block headers and the 3 trie's
 
 ![1678389736544](image/EthereumBlockHeaders/1678389736544.png)

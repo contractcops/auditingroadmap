@@ -1,7 +1,14 @@
 # What are the different steps in SHA-256?
+
+> Important notes:
+>
+> The return output of sha-256 is a 256 bit number
+
 <h2> Step one: Appending bits </h2>
 
 👉The first step involves preprocessing the input message to make it compatible with the hash function. It can be divided into two main substeps:
+
+> Substep: Transforming the input string into bits using ASCII
 
 <h2> Padding bits </h2>
 
