@@ -92,7 +92,10 @@ The output is: ```boolean valid || invalid signature```
     r’ = R’ * x
 
 <br>
-👉Calculate the signature validation result by comparing whether ```r’ == r```
+👉Calculate the signature validation result by comparing whether
+
+    r’ == r
+
 <br>
 
 ❗The general idea of the signature verification is to recover the point R’ using the public key and check whether it is same point R, generated randomly during the signing process.
