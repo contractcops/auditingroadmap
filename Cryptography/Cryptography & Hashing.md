@@ -4,7 +4,6 @@
 
 > ❗ An address in ethereum is essentially a hashed public key
 
-
 > How do digital signatures work?
 >
 > The data that is wanting to be sent is first hashed using the sha-256 hashing function. That data is then signed with the author's private key and can be verified if it was sent by him using his public key.

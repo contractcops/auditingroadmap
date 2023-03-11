@@ -58,13 +58,13 @@ Each block has a hash, too. And that hash needs to follow certain rules.
 
 👉This hash can’t be just any hash tough. The blockchain imposes some rules on it. Bitcoin, for example, requires the hash to start with a certain number of leading zeros. The actual amount of zeros required is called the network’s difficulty, and it’s a number that is adjusted every few blocks.
 
-👉And because each and every node is doing these hard computations, you now know that they `<b>`prooved`</b>` that they've done the work without actually checking yourself. In other words you are trusting them and agree with the validations of the nodes.
+👉And because each and every node is doing these hard computations, you now know that they `<b>`prooved `</b>` that they've done the work without actually checking yourself. In other words you are trusting them and agree with the validations of the nodes.
 
 👉Couple this with the fact that hashes are, for all intents and purposes, randomly generated and unguessable, and miners have only one way to produce different hashes: brute force. They keep trying over and over to generate new hashes, until they find one that fulfils the requirement.
 
 👉Since the same block always generates the same hash, they need to change it slightly for every new attempt. This is often done by adding a random number within the block’s data. The only purpose of this number is for miners to change it in order to be able to make different blocks, and therefore, different hashes.
 
-👉The better your hardware, the more hashes you can produce. That’s called your `<b>`Hash Rate`</b>`
+👉The better your hardware, the more hashes you can produce. That’s called your `<b>`Hash Rate `</b>`
 
 👉Since this process is essentially random, having slower hardware still gives you a small chance at preventing more powerful miners from getting 100% of the blocks.
 
@@ -102,4 +102,4 @@ mathematical puzzle derived from the block’s header.
 
 > ❗ Once generated, it is very easy for all of the other nodes to verify its integrity and add it onto the blockchain.
 
-> ❗ Whoever guesses the nonce first is the once to be rewarded.
+> ❗ Whoever guesses the nonce first is the one to be rewarded.
