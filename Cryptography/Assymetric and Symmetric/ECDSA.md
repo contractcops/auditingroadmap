@@ -47,11 +47,11 @@ The compressed public key is 257-bit integer (~33 bytes)
 Message - ``msg`` <br>
 Private key - ``privateKey`` <br>
 👉And produces an output: <br>
-<b>```Signature - {r, s}`` `</b>` := r and s are pair of integers
+``Signature - {r, s}`` := r and s are pair of integers
 
 🪜Steps: <br>
-1.Hash the message with for example SHA-256 `<br>`
-👉``h = SHA-256(msg)`` `<br>`
+1.Hash the message with for example SHA-256 <br>
+👉``h = SHA-256(msg)`` <br>
 2.Generate securely a random number k in the range [1…n-1] <br>
 2.1 In case of deterministic-ECDSA the value of k is HMAC derived from h + privateKey <br>
 👉``k`` derived from ``h + privateKey`` <br>
