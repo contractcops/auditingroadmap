@@ -83,7 +83,7 @@ The output is: ``boolean valid || invalid signature``
 
     s1 = s^(-1) (mod n)
 
-👉Recover the random point used during the signing:`<br>`
+👉Recover the random point used during the signing:<br>
 
     R’ = (h * s1) * G + (r * s1) * publicKey
 
