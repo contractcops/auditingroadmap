@@ -33,8 +33,8 @@ Public key (EC point): publicKey = privateKey * G
 <br>
 👉The private key is generated as a random number in the range of [1…n-1].
 
-👉The public key is a point on the elliptic curve, calculate by the EC point multiplication: `<br>`
-`<b>```publicKey = privateKey * G ```</b>`, in other words: the private key, multiplied by the generator point G.
+👉The public key is a point on the elliptic curve, calculate by the EC point multiplication: <br>
+```publicKey = privateKey * G ```, in other words: the private key, multiplied by the generator point G.
 
 👉The public key EC point {x, y} can be compressed to just one of the coordinates + 1 bit
 
@@ -42,23 +42,23 @@ E.g. -> for the ``secp256k1`` curve:
 The private key is 256-bit integer (32 bytes)
 The compressed public key is 257-bit integer (~33 bytes)
 
-🖊️ECDSA Sign `<br>`
-👉The signing algorithm takes as an input: `<br>`
-Message - ``msg`` `<br>`
-Private key - ``privateKey`` `<br>`
-👉And produces an output: `<br>`
-`<b>```Signature - {r, s}`` `</b>` := r and s are pair of integers
+🖊️ECDSA Sign <br>
+👉The signing algorithm takes as an input: <br>
+Message - ``msg`` <br>
+Private key - ``privateKey`` <br>
+👉And produces an output: <br>
+<b>```Signature - {r, s}`` `</b>` := r and s are pair of integers
 
-🪜Steps: `<br>`
+🪜Steps: <br>
 1.Hash the message with for example SHA-256 `<br>`
 👉``h = SHA-256(msg)`` `<br>`
-2.Generate securely a random number k in the range [1…n-1] `<br>`
-2.1 In case of deterministic-ECDSA the value of k is HMAC derived from h + privateKey `<br>`
-👉``k`` derived from ``h + privateKey`` `<br>`
-3.Calculate the random point ``R = k * G`` and take its x-coordinate: 👉 ``r = R*x`` `<br>`
-4.Calculate the signature proof: `<br>`
+2.Generate securely a random number k in the range [1…n-1] <br>
+2.1 In case of deterministic-ECDSA the value of k is HMAC derived from h + privateKey <br>
+👉``k`` derived from ``h + privateKey`` <br>
+3.Calculate the random point ``R = k * G`` and take its x-coordinate: 👉 ``r = R*x`` <br>
+4.Calculate the signature proof: <br>
 
-    s = k^(-1) * (h + r + privateKey) (mod n)
+    s = k^(-1) * (h + r * privateKey) (mod n)
 
 4.1 The modular inverse k^(-1) (mod n) is an integer such that:
 
@@ -70,15 +70,15 @@ Private key - ``privateKey`` `<br>`
 
 ❕ECDSA signatures are 2 times longer than the signer's private key for the curve used during the signing process.
 
-🔎ECDSA Verify Signature`<br>`
-To verify a ECDSA signature, take an input of `<br>`
-👉msg`<br>`
-👉signature ``{r, s} ``- produced by the signing algorithm`<br>`
-👉``public key`` - corresponding to the signer’s ``private key```<br>`
+🔎ECDSA Verify Signature<br>
+To verify a ECDSA signature, take an input of <br>
+👉msg<br>
+👉signature ``{r, s} ``- produced by the signing algorithm<br>
+👉``public key`` - corresponding to the signer’s ```private key```<br>
 The output is: ``boolean valid || invalid signature``
 
-🪜Steps:`<br>`
-👉Calculate the message hash, with the same hashing function used during signing`<br>`
+🪜Steps:<br>
+👉Calculate the message hash, with the same hashing function used during signing<br>
 👉Calculate the modular inverse of the signature proof:
 
     s1 = s^(-1) (mod n)
