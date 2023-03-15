@@ -22,6 +22,8 @@
 >
 > "Whereas under proof-of-work, the timing of blocks is determined by the mining difficulty, in proof-of-stake, the tempo is fixed. Time in proof-of-stake Ethereum is divided into slots (12 seconds) and epochs (32 slots). One validator is randomly selected to be a block proposer in every slot. This validator is responsible for creating a new block and sending it out to other nodes on the network. Also in every slot, a committee of validators is randomly chosen, whose votes are used to determine the validity of the block being proposed."
 
+> Gas tips go to block validators, base fee gets burned
+
 <h4> Transactions in PoS
 
 1) A user creates a transaction and signs it with his private key. This usually happens with a library such as ethers.js, web3.js, but under the hood its just making an API call to the JSON-RPC API
@@ -34,6 +36,3 @@
 4. One of the nodes is a validator (block propser). This node is selected pseudo-randomly depending on the amount of ether they are currently staking. The node is made up of 3 parts: execution client, validator and consensus client. The execution client bundles the transaction from the local mempool into an "execution" payload and executes them locally to apply the state change. Then this is passed to the consensus client where it is wrapped as part of a "beacon block" that has the rewards, penalties, slashings etc, to enable the network to agree.
 5. Other nodes receive this beacon block on the consensus layer gossip network. They then check its validity and attest that the block is valid and that it is the next logical block that must be added. Then all nodes that attest add the block to their local database.
 6. The transaction is "finalized". This means that it can't be reverted.
-
-
-> Gas tips go to block validators, base fee gets burned

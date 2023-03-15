@@ -1,4 +1,4 @@
-# Transactions
+# Chapter 6 - Transactions
 
 > Transactions are signed messages that originate from an EOA (Externally owned account) and are recorded on the Ethereum blockchain.
 
@@ -35,7 +35,6 @@ A transaction on the Ethereum blockchain consists of:
 
 As it may be noticed, the data payload does not contain a field like "from" to map to the sender. This is because the public key of the EOA originator can be derived from the digital signature (v, r, s). Furthermore, taking the last 20 characters of the hash of the public key gives us the address of the EOA originator.
 
-
 <h4> The transaction nonce
 
 The nonce in Ethereum transactions is commonly overlooked. As defined in the Yellow papers of Ethereum,
@@ -50,9 +49,9 @@ The nonce value in a transaction is extremely important, as it prevents multiple
 >
 > This means that one of the transactions you made will fail. Had the nonce value not existed, the only way that it would be determined which transaction gets made first would be whichever one reaches a Node first and gets validated first.
 
-> However, with the nonce value, the first transaction you make gets assigned a nonce value of 3 (example) and the second one - a value of 4. Now when the transaction reaches a certain Node, it knows what transaction to execute first because of the assigned nonce value. 
+> However, with the nonce value, the first transaction you make gets assigned a nonce value of 3 (example) and the second one - a value of 4. Now when the transaction reaches a certain Node, it knows what transaction to execute first because of the assigned nonce value.
 
->  Another problematic example is if you have 100 ether and you make a transaction of 2 ether. Had the nonce not been included in the transaction data, everyone on the blockchain could "repeat" the transaction, draining the entirety of ether on the account.
+> Another problematic example is if you have 100 ether and you make a transaction of 2 ether. Had the nonce not been included in the transaction data, everyone on the blockchain could "repeat" the transaction, draining the entirety of ether on the account.
 
 <h5> Keeping track of nonces
 
@@ -78,7 +77,7 @@ Transaction gas is a seperate from ether virual currency that is the amount that
 
 > For simple transactions that just tranfer ether from one EOA to another EOA the gas units needed is set at 21,000. To calculate how much that will cost, you simply have to multiply the gas price by the number of units.
 
-> ❗ In the case of a contract destination address, the gas amount needed can't be estimated correctly. 
+> ❗ In the case of a contract destination address, the gas amount needed can't be estimated correctly.
 >
 > Imagine the following scenario: You send the two requests to a lotery contract. The first transaction doesn't trigger any winnings and no functionality is needed to be calculated. The same exact second transaction, however, triggers a win and the prize needs to be calculated. This second transaction will now cost more than the first.
 
@@ -91,7 +90,7 @@ Transaction gas is a seperate from ether virual currency that is the amount that
 
 <h4> Transaction recipient
 
-A transaction recipient is a 20-byte address. This can be an EOA or a contract address. 
+A transaction recipient is a 20-byte address. This can be an EOA or a contract address.
 
 > ❗ Ethereum does not do any address validation. Any 20 bytes can represent an address. This, however, can be potentially dangerous as if you send funds to an address that you do not have the private key to (or no one does), you "burn" the ether that you sent to that address.
 >
@@ -104,7 +103,7 @@ A transaction recipient is a 20-byte address. This can be an EOA or a contract a
 > - Data
 > - Value
 
-> ❗ A transaction with no data but with value is a payment. 
+> ❗ A transaction with no data but with value is a payment.
 >
 > ❗ A transaction with data but without value is an invocation.
 >
@@ -112,9 +111,9 @@ A transaction recipient is a 20-byte address. This can be an EOA or a contract a
 
 <h5> Transmitting value to EOA and contracts
 
-When a transaction is made with value included with it, it does not matter whether its destination address is an EOA or an address. 
+When a transaction is made with value included with it, it does not matter whether its destination address is an EOA or an address.
 
-> ❗ The ethereum blockchain does not flag whether an address belongs to a contract or to an EOA. Ethereum records a state change, adding the value to the address. In case that the destination address is a contract, the Ethereum EVM will attempt to call the function named in the data payload of your transaction. 
+> ❗ The ethereum blockchain does not flag whether an address belongs to a contract or to an EOA. Ethereum records a state change, adding the value to the address. In case that the destination address is a contract, the Ethereum EVM will attempt to call the function named in the data payload of your transaction.
 >
 > ❗ In case there is no data in your transaction (and the address was a contract one), Ethereum will try to execute a so called fallback function in the contract. Given that the fallback function is marked as payable, it will determine what happens next.
 
@@ -122,7 +121,7 @@ When a transaction is made with value included with it, it does not matter wheth
 
 <h4> Transmitting data payload to an EOA or Contract
 
->  When an ethereum contract contains data, it usually means that it was meant for a contract. This does not mean that it can't be sent to an EOA, thats totally valid by the Ethereum protocol. However, if nothing is done with that data, Ethereum will simply ignore it and it will not record it as a state change.
+> When an ethereum contract contains data, it usually means that it was meant for a contract. This does not mean that it can't be sent to an EOA, thats totally valid by the Ethereum protocol. However, if nothing is done with that data, Ethereum will simply ignore it and it will not record it as a state change.
 
 > ❗❗ The data inside an Ethereum transaction is interpreted by the EVM as a function invocation. This usually means calling the external function in a smart contract and passing in any required parameters by that function.
 
@@ -169,7 +168,7 @@ When a transaction is made with value included with it, it does not matter wheth
 >    • Sig is the resulting signature.
 >
 >    Usually, it is only referred as Sig = (r,s)
-> 1) Verifying the Signature
+> 2) Verifying the Signature
 >    To verify the signature, one must have the signature (r and s), the serialized transac‐
 >    tion, and the public key that corresponds to the private key used to create the signa‐
 >    ture. Essentially, verification of a signature means “only the owner of the private key
@@ -192,7 +191,7 @@ the chain identifier
 
 Typically, people would think that creating the data structure and data payload for a transaction, signing it and trasmitting it is done in one step. This can be done, however, it would be more secure to create a transaction in two steps.
 
-> First, in an offline environment, sign the transaction. 
+> First, in an offline environment, sign the transaction.
 >
 > Second, trasmit the transaction from another computer connected to the internet.
 
@@ -202,11 +201,11 @@ Typically, people would think that creating the data structure and data payload 
 
 > A node in the Ethereum blockchain is refered to a client connected to the P2P network. This ideally forms a mesh network. No node is special, they all act as peers.
 
-> ❗❗ How does a transaction get verified by other nodes. 
+> ❗❗ How does a transaction get verified by other nodes.
 >
 > Transaction propagation starts with the originator node creating (or receiving) a signed transaction. The transaction is validated and then sent to all of the peers (up to 13 other nodes) called neightbours. Each neighbour verifies that transaction and then sends it to its 13 neighbours
 
-This creates the so called "flood routing" which makes sure that within seconds, the transaction is propagated to all of the Ethereum nodes around the globe. 
+This creates the so called "flood routing" which makes sure that within seconds, the transaction is propagated to all of the Ethereum nodes around the globe.
 
 > The neighbor that sent it to the node may be the
 > originator of the transaction or may have received it from one of its neighbors. To be
