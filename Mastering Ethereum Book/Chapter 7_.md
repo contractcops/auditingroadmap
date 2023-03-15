@@ -198,3 +198,110 @@ multiples of the base unit wei.
 
 Predefined Global Variables and Functions
 -
+Transaction/message call context
+The msg object is the transaction call (EOA originated) or message call (contract ori‐
+ginated) that launched this contract execution. It contains a number of useful
+attributes:
+
+>msg.sender:
+- >It represents the address that initiated this contract
+call, not necessarily the originating EOA that sent the transaction. If our contract
+was called directly by an EOA transaction, then this is the address that signed the
+transaction, but otherwise it will be a contract address.
+
+>msg.value
+- >The value of ether sent with this call (in wei).
+
+>msg.gas
+- >The amount of gas left in the gas supply of this execution environment. This was
+deprecated in Solidity v0.4.21 and replaced by the gasleft function.
+
+>msg.data
+- >The data payload of this call into our contract.
+
+>msg.sig
+- >The first four bytes of the data payload, which is the function selector.
+
+Whenever a contract calls another contract, the values of all the
+attributes of msg change to reflect the new caller’s information.
+
+>The
+only exception to this is the delegatecall function, which runs
+the code of another contract/library within the original msg
+context.
+
+Transaction context
+-
+The tx object provides a means of accessing transaction-related information:
+
+> tx.gasprice
+- > The gas price in the calling transaction
+
+> tx.origin
+The address of the originating EOA for this transaction. WARNING: unsafe!
+
+Block context
+-
+The block object contains information about the current block:
+
+> block.blockhash(blockNumber)
+- >The block hash of the specified block number, up to 256 blocks in the past. Dep‐
+recated and replaced with the blockhash function in Solidity v0.4.22.
+
+- >block.coinbase
+The address of the recipient of the current block’s fees and block reward.
+
+>block.difficulty
+- >The difficulty (proof of work) of the current block.
+
+>block.gaslimit
+- >The maximum amount of gas that can be spent across all transactions included in the current block.
+
+> block.number
+- >The current block number (blockchain height).
+
+> block.timestamp
+- >The timestamp placed in the current block by the miner (number of seconds
+since the Unix epoch).
+
+Address object
+-
+
+Any address, either passed as an input or cast from a contract object, has a number of
+attributes and methods:
+
+>address.balance
+- >The balance of the address, in wei. For example, the current contract balance is
+address(this).balance.
+
+>address.transfer(amount):
+- >Transfers the amount (in wei) to this address, throwing an exception on any
+error. We used this function in our Faucet example as a method on the
+msg.sender address, as msg.sender.transfer
+
+>address.send(amount)
+- >Similar to transfer, only instead of throwing an exception, it returns false on
+error. WARNING: always check the return value of send
+
+>address.call(payload):
+- >Low-level CALL function—can construct an arbitrary message call with a data
+payload. Returns false on error. WARNING: unsafe—recipient can (accidentally
+or maliciously) use up all your gas, causing your contract to halt with an OOG
+exception; always check the return value of call.
+//OOG exception is Out Of Gas exception
+
+Built-in functions
+-
+>addmod, mulmod
+- >For modulo addition and multiplication. For example, addmod(x,y,k) calculates
+(x + y) % k
+
+>keccak256, sha256, sha3, ripemd160
+- >Functions to calculate hashes with various standard hash algorithms.
+
+>ecrecover
+- >Recovers the address used to sign a message from the signature.
+
+>selfdestrunct(recipient_address)
+- >Deletes the current contract, sending any remaining ether in the account to the
+recipient address.The address of the currently executing contract account.
