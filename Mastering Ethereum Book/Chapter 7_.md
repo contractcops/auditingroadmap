@@ -305,3 +305,63 @@ Built-in functions
 >selfdestrunct(recipient_address)
 - >Deletes the current contract, sending any remaining ether in the account to the
 recipient address.The address of the currently executing contract account.
+
+Contract Definition
+-
+Solidity’s principal data type is contract;
+Similar to any object in an object-oriented language, the contract is
+a container that includes data and methods.
+
+>Interface
+- >An interface definition is structured exactly like a contract, except none of the
+functions are defined, they are only declared. This type of declaration is often called a stub; it tells you the functions’ arguments and return types without any
+implementation. An interface specifies the “shape” of a contract; when inherited,
+each of the functions declared by the interface must be defined by the child.
+
+>Library
+- >A library contract is one that is meant to be deployed only once and used by
+other contracts, using the delegatecall method
+
+>Functions
+- >Within a contract, we define functions that can be called by an EOA transaction or another contract. In our Faucet example, we have two functions: withdraw and the fallback function.
+
+The syntax we use to declare a function in Solidity is as follows:
+>![functionsSyntax.png](../Mastering%20Ethereum%20Book/image/Chapter7_/functionsSyntax.png)
+
+>FunctionName
+- > The name of the function, which is used to call the function in a transaction
+(from an EOA), from another contract, or even from within the same contract.
+One function in each contract may be defined without a name, in which case it is
+the fallback function, which is called when no other function is named. The fall‐
+back function cannot have any arguments or return anything
+
+>Parameters
+- >Following the name, we specify the arguments that must be passed to the func‐
+tion, with their names and types. In our Faucet example we defined uint with
+draw_amount as the only argument to the withdraw function.
+
+The next set of keywords (public, private, internal, external) specify the func‐
+tion’s visibility:
+
+>public
+- >Public is the default; such functions can be called by other contracts or EOA
+transactions, or from within the contract. In our Faucet example, both functions
+are defined as public.
+>external
+- >External functions are like public functions, except they cannot be called from
+within the contract unless explicitly prefixed with the keyword this.
+>internal
+- >Internal functions are only accessible from within the contract—they cannot be
+called by another contract or EOA transaction. They can be called by derived
+contracts (those that inherit this one).
+>private
+- >Private functions are like internal functions but cannot be called by derived
+contracts.
+
+> ❗Keep in mind that the terms internal and private are somewhat misleading. Any func‐
+tion or data inside a contract is always visible on the public blockchain, meaning that
+anyone can see the code or data. The keywords described here only affect how and
+when a function can be called.
+
+The second set of keywords (pure, constant, view, payable) affect the behavior of
+the function:
