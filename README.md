@@ -1,4 +1,12 @@
-# blockchain-logs
-A repository, dedicated to collecting useful information for people interested in getting into the world of Ethereum, whether is is as a Web3 developer or smart contract security. The repository contains a summary of the popular Ethereum starter book, namely "Mastering Ethereum", external resources from other repositories or our own findings and research.
+# eth-materials
+An open source repository, dedicated towards creating a journal of free materials for learning smart contract development & auditing.
+</br>
+The repository currently contains a summary of:
 
-Feel free request PRs for adding other useful information to the repository.
+- Mastering Ethereum book
+- PoS vs PoW
+- Most important information about the different types of cryptographic functions used within the Ethereum blockchain
+- Common security issues found in contracts
+- Tokens (ERC20, ERC721, etc.)
+
+We encourage you to take a look and fork/add to the repository. 
