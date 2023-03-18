@@ -218,3 +218,13 @@ This creates the so called "flood routing" which makes sure that within seconds,
 Valid transactions are eventually included in a block of transactions and thus - recorded to the Ethereum blockchain. Transactions also modify the state of the Ethereum singleton, either by adding to a balance of an account or by invoking some functionality of a contract.
 
 > Such changes are kept in the form of a transaction receipt, as well as any events that may come together with it.
+
+
+
+> Important note: 
+>
+> tx.origin != msg.sender
+>
+> The transaction origin(tx.origin) is the EOA that initiated the transaction. 
+>
+> The msg.sender can be any contract/EOA that invoked the function

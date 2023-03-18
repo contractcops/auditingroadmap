@@ -210,3 +210,76 @@ Like other OOP languages, Solidity has a constructor which is ran only once.
 Solidity also has modifiers, which are usually used to "require()" some condition. They are very useful due to the fact that they can be easily reproduced and used in multiple functions without code duplication:
 
 ![1678916908533](image/Chapter7-Smartcontractsandsolidity/1678916908533.png)
+
+<h4> Inheritance
+
+Solidity supports inheritance from multiple contracts. 
+
+<h4> Error handling
+
+Transactions in Ethereum are atomic. This means that they are either executed and recorded onto the blockchain or the fail and all of the state changes are reverted until the point of execution.
+
+In Solidity, you can use a "gate condition" by introducing a require statement. The require statement checks a condition and makes sure that it is either true or no code can execute under it.
+
+> require(msg.value >= 0.1 ether, "Not enough ether!")
+
+<h4> Events in Solidity
+
+Every transaction, after its execution, creates a so called transaction receipt. The receipt contains log entries, which are constructed by the events in solidity.
+
+It is generally good practice to introduce events when necessary, as it gives more information about a transaction and can provide context in case of an unexpected behaviour.
+
+<h4> Calling other contracts (send, call, callcode, delegatecall)
+
+> Calling other contracts can be potentially dangerous. Unless you are completely away of what a contract does and how it executes, you should avoid using functionality from foreign contracts. 
+
+> The safest way to call a different contract is by creating it yourself. That way, you are aware of its functionality and are certain that it will behave as expected.
+>
+> To do this, we can instantiate it using the "new" keyword, just like in other OOP languages. 
+
+> Another possibility is to cast the address of an existing instance of the contract. This way you are consuming its interface of an already existing instance. 
+>
+> ❗ It is critically important that the instance you are using is of the type you assume. Furthermore, this method is much less safe than the above, as its more prone to mistakes and you are not completely sure of its functionality.
+
+![1679000081723](image/Chapter7-Smartcontractsandsolidity/1679000081723.png)
+
+<h5> Raw call, delegatecall
+
+> These are the most "low-level" methods in Solidity of contract to contract communication. 
+>
+> ❗ This is also the most flexible and dangerous way of communication.
+
+> ❗ Using <contract_adr>.call("method", parameters) is a blind call into a function. It can expose the contract to multiple security risks, but most importantly reentrancy.
+
+> Another variant of call is delegatecall(). It is different in a way that it the msg context does not change. 
+>
+> For example, whereas call() changes the value of msg.sender to be the calling contract, delegatecall() keeps the same msg.sender as in the calling contract. delegatecall() runs the code of another contract inside the context of the execution of the current contract. It is most often used to invoke code from a library.
+
+> call() changes the value of msg.sender to be the calling contract, delegatecall() keeps the same msg.sender as in the calling contract.
+
+call() shown as 1)
+
+delegatecall() as 2)
+
+![1679001762967](image/Chapter7-Smartcontractsandsolidity/1679001762967.png)
+
+
+> Important note:
+>
+> tx.origin != msg.sender
+>
+> The transaction origin(tx.origin) is the EOA that initiated the transaction.
+>
+> The msg.sender can be any contract/EOA that invoked the function
+
+
+
+> DELEGATECALL: 
+>
+> https://solidity-by-example.org/delegatecall/
+
+> ❗❗ Difference between CALL() and DELEGATECALL()
+
+![1679003189446](image/Chapter7-Smartcontractsandsolidity/1679003189446.png)
+
+![1679003220134](image/Chapter7-Smartcontractsandsolidity/1679003220134.png)
