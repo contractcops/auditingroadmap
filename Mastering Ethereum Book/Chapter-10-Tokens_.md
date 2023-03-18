@@ -200,3 +200,111 @@ and events:
 
 >Approval
 - >Event logged upon a successful call to approve
+
+ERC20 optional functions
+-
+
+In addition to the required functions listed in the previous section, the following
+optional functions are also defined by the standard:
+
+>name
+- >Returns the human-readable name (e.g., “US Dollars”) of the token.
+
+>symbol
+- >Returns a human-readable symbol(e.g., "USD") for the token.
+
+>decimals
+- >Returns the number of decimals used to divide token amounts. For example, if
+decimals is 2, then the token amount is divided by 100 to get its user
+representation.
+
+The ERC20 interface defined in Solidity
+-
+
+![interfaceERC20.png](../Mastering%20Ethereum%20Book/image/Chapter10/interfaceERC20.png)
+
+ERC20 Data structures
+-
+
+If you examine any ERC20 implementation you will see that it contains two data
+structures, one to track balances and one to track allowances. In Solidity, they are
+implemented with a data mapping
+
+        mapping(address => uint256) balances;
+
+The first data mapping implements an internal table of token balances, by owner.
+This allows the token contract to keep track of who owns the tokens. Each transfer is
+a deduction from one balance and an addition to another balance:
+
+
+The second data structure is a data mapping of allowances.
+The ERC20 contract keeps track of the allowances with a two-dimensional mapping, with the primary key being the address of the token owner, mapping to a spender address
+and an allowance amount
+
+        mapping(address => mapping(address => amount)) public allowed
+
+ERC20 workflows: “transfer” and “approve & transferFrom"
+-
+
+The ERC20 token standard has two transfer functions.
+
+>The first is a single-transaction, straight‐
+forward workflow using the transfer function.
+
+This workflow is the one used by
+wallets to send tokens to other wallets. The vast majority of token transactions hap‐
+pen with the transfer workflow.
+Executing the transfer contract is very simple. If Alice wants to send 10 tokens to
+Bob, her wallet sends a transaction to the token contract’s address, calling the
+transfer function with Bob’s address and 10 as the arguments. The token contract
+adjusts Alice’s balance (–10) and Bob’s balance (+10) and issues a Transfer event.
+
+>The second workflow is a two-transaction workflow that uses approve followed by transferFrom.
+
+This workflow allows a token owner to delegate their control to another address. It is most often used to delegate control to a contract for distribution of tokens, but it can also be used by exchanges
+
+For the approve & transferFrom workflow, two transactions are needed. Let’s say
+that Alice wants to allow the AliceICO contract to sell 50% of all the AliceCoin tokens
+to buyers like Bob and Charlie.
+
+1. First, Alice launches the AliceCoin ERC20 contract, issuing all the AliceCoin to her own address.
+
+2. Then, Alice launches the AliceICO con‐
+tract that can sell tokens for ether.
+
+3. Next, Alice initiates the approve & transferFrom
+workflow
+
+4. She sends a transaction to the AliceCoin contract, calling approve with the
+address of the AliceICO contract and 50% of the totalSupply as arguments. This will
+trigger the Approval event.
+
+5. Now, the AliceICO contract can sell AliceCoin.
+
+When the AliceICO contract receives ether from Bob, it needs to send some Alice‐
+Coin to Bob in return
+Within the AliceICO contract is an exchange rate between Ali‐
+ceCoin and ether. The exchange rate that Alice set when she created the AliceICO
+contract determines how many tokens Bob will receive for the amount of ether sent
+to the AliceICO contract.
+
+When the AliceICO contract calls the AliceCoin transfer
+From function, it sets Alice’s address as the sender and Bob’s address as the recipient,
+and uses the exchange rate to determine how many AliceCoin tokens will be transfer‐
+red to Bob in the value field.
+
+The AliceCoin contract transfers the balance from Ali‐
+ce’s address to Bob’s address and triggers a Transfer event. The AliceICO contract
+can call transferFrom an unlimited number of times, as long as it doesn’t exceed the
+approval limit Alice set. The AliceICO contract can keep track of how many Alice‐
+Coin tokens it can sell by calling the allowance function.
+
+ERC20 implementations
+-
+>Consensys EIP20
+- >A simple and easy-to-read implementation of an ERC20-compatible token.
+>OpenZeppelin StandardToken
+- >This implementation is ERC20-compatible, with additional security precautions.
+It forms the basis of OpenZeppelin libraries implementing more complex
+ERC20-compatible tokens with fundraising caps, auctions, vesting schedules, and
+other features.
