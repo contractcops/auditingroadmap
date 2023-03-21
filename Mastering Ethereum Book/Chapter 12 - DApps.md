@@ -94,3 +94,80 @@ instances of the application, or between users of the application.
 >There are a variety of decentralized alternatives to server-based protocols, offering messaging over a P2P network.
 The most notable P2P messaging protocol for DApps is Whisper, which is part of the Ethereum Foundation’s Go-Ethereum suite of tools.
 
+A Basic DApp Example: Auction DApp
+-
+
+This Auction DApp allows a user to register a “deed” token, which represents some unique asset, such as a house, a car, a trademark, etc. Once a token has been registered, the ownership of the token is transferred to the Auction DApp, allowing it to be listed for sale. The Auction DApp lists each of the registered tokens, allowing other users to place bids. During each auction, users can join a chat room created specifically for that auction. Once an auction is finalized, the deed token ownership is transferred to the winner of the auction.
+
+The overall auction process is the following:
+
+You can find the source code for the auction DApp in the book’s repository. - https://github.com/ethereumbook/ethereumbook/tree/develop/code/auction_dapp
+
+![DApp_Architecture.png](../Mastering%20Ethereum%20Book/image/Chapter12-DApps/DApp_Architecture.png)
+
+Auction DApp: Backend Smart Contracts
+-
+The DApp is supported by two smart contracts
+
+        AuctionRepository and DeedRepository
+
+>The DeedRepository contract is an ERC721-compatible non-fungible token.
+
+The Auction DApp uses the DeedRepository contract to issue and track tokens for each auction.
+
+>The auction itself is orchestrated by the AuctionRepository contract.
+
+DApp governance
+-
+If you read through the two smart contracts of the Auction DApp you will notice something important: there is no special account or role that has special privileges over the DApp.
+
+>This is a deliberate choice to decentralize the governance of the DApp and relinquish
+any control once it has been deployed.
+
+Some DApps, by comparison, have one or more privileged accounts with special capabilities, such as the ability to terminate the DApp contract, to override or change its configuration, or to “veto” certain operations. Usually, these governance functions are introduced in the DApp in order to
+avoid unknown problems that might arise due to a bug.
+
+The issue of governance is a particularly difficult one to solve, as it represents a double-edged sword. On the one side, privileged accounts are dangerous; if compromised, they can subvert the security of the DApp. On the other side, without any privileged account, there are no recovery options if a bug is found.
+
+>We have seen both of
+these risks manifest in Ethereum DApps
+
+Auction DApp: Frontend User Interface
+-
+
+You can find the user interface code in the code/auction_dapp/frontend folder in the
+book’s repository - https://github.com/ethereumbook/ethereumbook/tree/develop/code/auction_dapp
+
+Once the Auction DApp’s contracts are deployed, you can interact with them using
+your favorite JavaScript console and web3.js, or another web3 library.
+
+Further Decentralizing the Auction DApp
+-
+
+There are two things we can do to make this DApp decentralized and resilient:
+1. Store all the application code on Swarm or IPFS
+2. Access the DApp by reference to a name, using the Ethereum Name Service.
+
+Storing the Auction DApp on Swarm
+-
+
+Our Auction DApp already uses Swarm to store the icon image for each auction. 
+
+>This is a much more efficient solution than attempting to store data on Ethereum, which is expensive. It is also a lot more resilient than if these images were stored in a centralized service like a web server or file server.
+
+Preparing Swarm and Uploading files to Swarm
+-
+To get started, you need to install Swarm and initialize your Swarm node. Swarm is
+part of the Ethereum Foundation’s Go-Ethereum suite of tools.
+
+Once you have your local Swarm node and gateway running, you can upload to Swarm and the files will be accessible on any Swarm node, simply by reference to the file hash.
+
+Now, our entire Auction DApp is hosted on Swarm and accessible by the Swarm
+URL:
+
+        bzz://ab164cf37dc10647e43a233486cdeffa8334b026e32a480dd9cbd020c12d4581
+
+A URL like that is much less user-friendly than a nice name like auction_dapp.com.
+
+In the next section we will examine Ethereum’s name service, which allows us to use easy-to-read names but still preserves the decentralized nature of our
+application.

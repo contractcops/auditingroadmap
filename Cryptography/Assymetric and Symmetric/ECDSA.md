@@ -100,7 +100,7 @@ The output is: ``boolean valid || invalid signature``
 
 ❗The general idea of the signature verification is to recover the point R’ using the public key and check whether it is same point R, generated randomly during the signing process.
 
-Cheatsheet`<br>`
+Cheatsheet<br>
 1️.The signing encodes random ``point R`` (represented by its ``x``-coordinate only) through elliptic curve transformations using the ``private key`` and the ``message``’s ``hash`` into a ``number s``, which is the proof that the message signer knows the ``private key``. The signature ``{r, s}`` cannot reveal the private key due to the difficulty of the ``ECDLP problem``
 
 2️.The signature verification decodes the proof ``number s`` from the signature back to its original ``point R``, using the ``public key`` and the ``message’s hash`` and compares the ``x``-coordinate of the recovered ``R`` with the ``r`` value from the signature
