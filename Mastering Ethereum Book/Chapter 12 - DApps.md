@@ -69,3 +69,28 @@ Due to high gas costs and the currently low block gas limit, most DApps utilize 
 IPFS
 -
 
+IPFS stands for Inter-Planetary File System, it's a decentralized content-addressable storage system that distributes stored objects among peers in a P2P network.
+
+>Content addressable means that each piece of content (file) is hashed and the hash is used to identify that file. You can then retrieve any file from any IPFS node by requesting it
+by its hash.
+
+IPFS aims to replace HTTP as the protocol of choice for delivery of web applications.
+Instead of storing a web application on a single server, the files are stored on IPFS and
+can be retrieved from any IPFS node.
+
+Swarm
+-
+
+Swarm is another content-addressable P2P storage system, similar to IPFS. It was created by the Ethereum Foundation, as part of the Go-Ethereum suite of tools.
+
+Like IPFS, it allows you to store files that get disseminated and replicated by Swarm nodes. You can access any Swarm file by referring to it by a hash. Swarm allows you to access a website from a decentralized P2P system, instead of a central web server.
+
+Decentralized Message Communications Protocols
+-
+Another major component of any application is inter-process communication. That
+means being able to exchange messages between applications, between different
+instances of the application, or between users of the application.
+
+>There are a variety of decentralized alternatives to server-based protocols, offering messaging over a P2P network.
+The most notable P2P messaging protocol for DApps is Whisper, which is part of the Ethereum Foundation’s Go-Ethereum suite of tools.
+
