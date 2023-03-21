@@ -304,3 +304,30 @@ Once you have registered an ENS name, you can manage it using another user-frien
 ENS Resolvers
 -
 
+In ENS, resolving a name is a two-step process:
+
+1. The ENS registry is called with the name to resolve after hashing it. If the record exists, the registry returns the address of its resolver.
+
+2. The resolver is called, using the method appropriate to the resource being requested. The resolver returns the desired result.
+
+>This two-step process has several benefits. Separating the functionality of resolvers
+from the naming system itself gives us a lot more flexibility. The owners of names can
+use custom resolvers to resolve any type or resource, extending the functionality of
+ENS
+
+From App to DApp
+-
+
+The auction DApp uses the decentralized storage system Swarm to store application resources such as images. The DApp also uses the decentralized communications protocol Whisper to offer an encrypted chat room for each auction, without any central servers.
+
+The final result is a DApp that has no central point of authority, no central point of failure,
+and expresses the “web3” vision.
+
+![fromApp_to_DApp.png](../Mastering%20Ethereum%20Book/image/Chapter12-DApps/fromApp_to_DApp.png)
+
+Conclusions
+-
+
+Decentralized applications are the culmination of the Ethereum vision, as expressed by the founders from the very earliest designs. While a lot of applications call themselves “DApps” today, most are not fully decentralized.
+
+Over time, as the technology matures further, more and more of our applications can be decentralized, resulting in a more resilient, censorship-resistant, and free web.
