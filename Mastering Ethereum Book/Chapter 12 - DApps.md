@@ -240,3 +240,67 @@ Resolvers
 The basic ENS contract can’t add metadata to names; that is the job of so-called “resolver contracts.” These are user-created contracts that can answer questions about
 the name, such as what Swarm address is associated with the app, what address receives payments to the app (in ether or tokens), or what the hash of the app is (to
 verify its integrity).
+
+Middle Layer: The .eth Nodes
+-
+
+At the time of writing, the only top-level domain that is uniquely registrable in a
+smart contract is .eth.
+
+> .eth domains are distributed via an auction system.
+
+Vickrey auctions
+-
+
+Names are distributed via a modified Vickrey auction. In a traditional Vickrey auction, every bidder submits a sealed bid, and all of them are revealed simultaneously, at
+which point the highest bidder wins the auction but only pays the second-highest bid.
+Therefore bidders are incentivized not to bid less than the true value of the name to them, since bidding their true value increases the chance they will win but does not
+affect the price they will eventually pay.
+
+On a blockchain, some changes are required:
+
+- > To ensure bidders don’t submit bids they have no intention of paying, they must
+lock up a value equal to or higher than their bid beforehand, to guarantee the bid
+is valid.
+
+- > Because you can’t hide secrets on a blockchain, bidders must execute at least two transactions (a commit–reveal process), in order to hide the original value and name they bid on.
+
+- >Since you can’t reveal all bids simultaneously in a decentralized system, bidders must reveal their own bids themselves; if they don’t, they forfeit their locked-up
+funds. Without this forfeit, one could make many bids and choose to reveal only one or two, turning a sealed-bid auction into a traditional increasing price auction.
+
+Therefore, the auction is a four-step process:
+
+![steps_in_vickery_auction.png](../Mastering%20Ethereum%20Book/image/Chapter12-DApps/steps_in_vickery_auction.png)
+
+Top Layer: The Deeds
+-
+
+The top layer of ENS is yet another super-simple contract with a single purpose: to
+hold the funds.
+
+When you win a name, the funds are not actually sent anywhere, but are just locked
+up for the period you want to hold the name
+This works like a guaranteed buyback: if the owner does not want the name any more they can sell it back to the system and recover their ether.
+
+ENS creates a deed contract for each new name. The deed contract is very simple (about 50 lines of code), and it only allows the funds to be transferred back to a single account (the deed owner) and to be called by a single entity (the registrar contract). This approach drastically reduces the attack surface where bugs can put the funds at risk.
+
+Registering a Name
+-
+
+Registering a name in ENS is a four-step process, as we saw in Vickery auctions.
+
+- >First we place a bid for any available name
+
+- >Then we reveal our bid after 48
+hours to secure the name
+
+![timeline.png](../Mastering%20Ethereum%20Book/image/Chapter12-DApps/timeline.png)
+
+Managing Your ENS Name
+-
+
+Once you have registered an ENS name, you can manage it using another user-friendly interface: ENS Manger
+
+ENS Resolvers
+-
+
