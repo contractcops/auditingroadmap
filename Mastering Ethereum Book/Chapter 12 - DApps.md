@@ -171,3 +171,72 @@ A URL like that is much less user-friendly than a nice name like auction_dapp.co
 
 In the next section we will examine Ethereum’s name service, which allows us to use easy-to-read names but still preserves the decentralized nature of our
 application.
+
+The Ethereum Name Service (ENS)
+-
+
+The Ethereum Foundation donation address is 0xfB6916095ca1df60
+bB79Ce92cE3Ea74c37c5d359; in a wallet that supports ENS, it’s simply ethereum.eth.
+
+ENS is more than a smart contract; it’s a fundamental DApp itself, offering a decentralized name service. Furthermore, ENS is supported by a number of DApps for registration, management, and auctions of registered names.
+
+History of Ethereum Name Services
+-
+
+ENS was launched on Star Wars Day, May 4, 2017 (after a failed attempt to launch it on Pi Day, March 15)
+
+The ENS Specification
+-
+ENS is specified mainly in three Ethereum Improvement Proposals.
+
+ENS follows a “sandwich” design philosophy: a very simple layer on the bottom, followed by layers of more complex but replaceable code, with a very simple top layer that keeps all the funds in separate accounts.
+
+Bottom Layer: Name Owners and Resolvers
+-
+
+The ENS operates on “nodes” instead of human-readable names: a human-readable
+name is converted to a node using the “Namehash” algorithm.
+
+>The base layer of ENS is a cleverly simple contract (less than 50 lines of code) defined
+by ERC137 that allows only nodes’ owners to set information about their names and
+to create subnodes (the ENS equivalent of DNS subdomains).
+
+>The only functions on the base layer are those that enable a node owner to set information about their own node (specifically the resolver, time to live, or transferring
+the ownership) and to create owners of new subnodes.
+
+The Namehash algorithm
+-
+
+>Namehash is a recursive algorithm that can convert any name into a hash that identifies the name.
+
+>For example, the Namehash
+node of subdomain.example.eth is keccak('example.eth' node) + keccak('subdomain'). The subproblem we must solve is to compute the node for example.eth, which is keccak('<.eth>' node) + keccak('example').
+
+How to choose a valid name
+-
+
+You could use labels and domains of any length, but for the sake of compatibility with
+legacy DNS, the following rules are recommended:
+
+1. Labels should be no more than 64 characters each.
+2. Complete ENS names should be no more than 255 characters.
+3.  Labels should not start or end with hyphens, or start with digits.
+
+Root node ownership
+-
+Currently the purpose and goal of these keyholders is to work in consensus with the
+community to:
+1.  Migrate and upgrade the temporary ownership of the .eth TLD to a more permanent contract once the system is evaluated.
+
+2. Allow adding new TLDs, if the community agrees they are needed.
+
+3.  Migrate the ownership of the root multisig to a more decentralized contract, when such a system is agreed upon, tested, and implemented.
+
+4.  Serve as a last-resort way to deal with any bugs or vulnerabilities in the top-level registries.
+
+Resolvers
+-
+
+The basic ENS contract can’t add metadata to names; that is the job of so-called “resolver contracts.” These are user-created contracts that can answer questions about
+the name, such as what Swarm address is associated with the app, what address receives payments to the app (in ether or tokens), or what the hash of the app is (to
+verify its integrity).
