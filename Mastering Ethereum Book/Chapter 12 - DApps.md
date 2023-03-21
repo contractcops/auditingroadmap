@@ -47,3 +47,25 @@ The second major consideration of smart contract architecture design is DApp siz
 Having the core business logic of the DApp
 be dependent on external data (e.g., from a centralized server) means your users will
 have to trust these external resources.
+
+Frontend (Web User Interface)
+-
+The client-side interface of a DApp can use standard web technologies (HTML, CSS, JavaScript, etc.). This allows a traditional web developer to use familiar tools, libraries, and frameworks.
+
+>Interactions with Ethereum, such as signing messages, sending transactions, and managing keys, are
+often conducted through the web browser, via an extension such as MetaMask.
+
+The frontend is usually linked to Ethereum via the web3.js JavaScript library, which is bundled with the frontend resources and served to a browser by a web server.
+
+Data Storage
+-
+
+Due to high gas costs and the currently low block gas limit, most DApps utilize off-chain data storage services, they store the bulky data off the Ethereum chain, on a data storage platform.
+
+>That data storage platform can be centralized for example, a typical cloud database, or decentralize - stored on a P2P platform such as the IPFS, or Ethereum’s own Swarm platform.
+
+>Decentralized P2P storage is ideal for storing and distributing large static assets
+
+IPFS
+-
+
