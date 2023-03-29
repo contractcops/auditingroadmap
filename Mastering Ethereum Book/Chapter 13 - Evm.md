@@ -32,7 +32,7 @@ The Ethereum virtual machine can be seen as just a computation engine and storag
 
 The EVM is very similar to JVM or .NET as in that it simulates a computer virtually, enabling compatitability across different platforms and systems.
 
-> The EVM has no scheduling ability, as the nodes (clients) externally decide which smart contracts need execution and execute them in order, one by one. Therefore, we can say that the Ethereum virtual machine is single-threaded - similar to Javascript. 
+> The EVM has no scheduling ability, as the nodes (clients) externally decide which smart contracts need execution and execute them in order, one by one. Therefore, we can say that the Ethereum virtual machine is single-threaded - similar to Javascript.
 
 > There is no physical machine interface of the EVM, it is entirely virtual.
 
@@ -52,15 +52,13 @@ Ontop of this, the ethereum virtual machine has access to account information an
 >
 > This can be perceived as updating ownership, storage, etc.
 
-> At the very top level, theres the Ethereum world state. The Ethereum world state represents a mapping of all of the address mapped to the respective accounts.
+> At the very top level, theres the Ethereum world state. The Ethereum world state represents a mapping of all of the address mapped to the respective account states.
 
-> At the lower level, theres the ether balance, a nonce (the amount of transactions or contract deployments that an EOA has made) and the account's program code. 
+> At the lower level, theres the ether balance, a nonce (the amount of transactions or contract deployments that an EOA has made) and the account's program code.
 >
 > An EOA has no storage and empty program code
 
-The following flow is important as it highlights what happens when a transactions hits a smart contract: 
-
-
+The following flow is important as it highlights what happens when a transactions hits a smart contract:
 
 > The EVM execution can be thought of running a sandboxed version, which in the case of a failure/exception -> reverts and all changes are discarded. The transaction fees are still paid and the transaction is still logged as an attempt.
 
@@ -70,7 +68,7 @@ Since a smart contract can execute transactions itself, this process is recursiv
 
 There is an important difference between the code used when creating and deploying a smart contract.
 
-> To create a smart contract: 
+> To create a smart contract:
 
 ![1679520718517](image/Chapter13-Evm/1679520718517.png)
 
@@ -97,7 +95,7 @@ Examples from the Mastering Ethereum book:
 > - Adding two numbers costs 3 gas
 > - Calculating a Keccak-256 hash costs 30 gas + 6 gas for each 256 bits of data being
 >   hashed
-> -  Sending a transaction costs 21,000 gas
+> - Sending a transaction costs 21,000 gas
 
 This feature also disincentivizes spam requests, as the attack would have to pay for each request's execution and bandwith in gas.
 
@@ -105,7 +103,7 @@ This feature also disincentivizes spam requests, as the attack would have to pay
 
 When the EVM is instantiated to execute a transaction's data payload call to a specific function in a contract, it is given a fixed amount of gas limit specified by that transaction.
 
-> Each OPCODE that it executes (addition, storage, etc) costs a specific amount of gas and is deducted in runtime. 
+> Each OPCODE that it executes (addition, storage, etc) costs a specific amount of gas and is deducted in runtime.
 >
 > If the EVM tracks that it has run out of gas, a OOG exception is thrown and the changes are reverted.
 

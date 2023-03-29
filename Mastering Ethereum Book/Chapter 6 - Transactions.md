@@ -2,7 +2,7 @@
 
 > Transactions are signed messages that originate from an EOA (Externally owned account) and are recorded on the Ethereum blockchain.
 
-> ❗ Everything in Ethereum is started (initiated) by a transaction. Ethereum is not autonomous, every transaction represents a starte change in the Ethereum blockchain. It can be compared like every "tick" of a handwatch's handles. Transactions are what move the Ethereum ecosystem.
+> ❗ Everything in Ethereum is started (initiated) by a transaction. Ethereum is not autonomous, every transaction represents a state change in the Ethereum blockchain. It can be compared like every "tick" of a handwatch's handles. Transactions are what move the Ethereum ecosystem.
 
 A transaction on the Ethereum blockchain consists of:
 
@@ -219,12 +219,10 @@ Valid transactions are eventually included in a block of transactions and thus -
 
 > Such changes are kept in the form of a transaction receipt, as well as any events that may come together with it.
 
-
-
-> Important note: 
+> Important note:
 >
 > tx.origin != msg.sender
 >
-> The transaction origin(tx.origin) is the EOA that initiated the transaction. 
+> The transaction origin(tx.origin) is the EOA that initiated the transaction.
 >
 > The msg.sender can be any contract/EOA that invoked the function

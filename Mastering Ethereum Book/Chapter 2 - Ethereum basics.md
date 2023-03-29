@@ -2,7 +2,7 @@
 
 <h4>Ether currency units</h4>
 
-> Ether is subdivided into the smallest unit possible, called wei. 
+> Ether is subdivided into the smallest unit possible, called wei.
 >
 > One ether is 1 * 10^18 or 1,000,000,000,000,000,000 wei
 
@@ -20,7 +20,7 @@
 
 <h2>Extenally owned accounts (EOAs) and Contracts
 
-Metamask is an externally owned account. It is an account that has a private key - meaning there's access to private funds or contracts. 
+Metamask accounts are externally owned accounts. It is an account that has a private key - meaning there's access to private funds or contracts.
 
 > The other type of account is a contract account. It does not have a private key and is controlled by the logic within the smart contract code.
 

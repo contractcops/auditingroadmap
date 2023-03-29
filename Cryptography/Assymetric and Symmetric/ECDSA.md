@@ -1,12 +1,12 @@
 # Elliptic curves and ECDSA
 
-<h2>ECDSA is Elliptic Curve Digital Signature Algorithm </h2>
+<h2>ECDSA is short for Elliptic Curve Digital Signature Algorithm </h2>
 
-👉The idea is that if you are going to send a message to a friend, you could send the message + signature + public key to your friend, and the signature is computed using the private key.
+The idea is that if you are going to send a message to someone, you could send the message + signature + public key to them, and the signature is computed using the private key.
 
-👉And your friend could verify the authenticity of the message with the signature and the public key
+The recipient could then verify the authenticity of the message with the signature and the public key
 
-👉It is possible to authenticate the data without revealing the private key.
+It is possible to authenticate the sender without revealing the private key.
 
 ![ECDSA](../images/EC%20and%20ECDSA/ECDSA.png)
 
@@ -33,8 +33,8 @@ Public key (EC point): publicKey = privateKey * G
 <br>
 👉The private key is generated as a random number in the range of [1…n-1].
 
-👉The public key is a point on the elliptic curve, calculate by the EC point multiplication: <br>
-```publicKey = privateKey * G ```, in other words: the private key, multiplied by the generator point G.
+👉The public key is a point on the elliptic curve, calculate by the EC point multiplication: `<br>`
+``publicKey = privateKey * G ``, in other words: the private key, multiplied by the generator point G.
 
 👉The public key EC point {x, y} can be compressed to just one of the coordinates + 1 bit
 
@@ -42,21 +42,21 @@ E.g. -> for the ``secp256k1`` curve:
 The private key is 256-bit integer (32 bytes)
 The compressed public key is 257-bit integer (~33 bytes)
 
-🖊️ECDSA Sign <br>
-👉The signing algorithm takes as an input: <br>
-Message - ``msg`` <br>
-Private key - ``privateKey`` <br>
-👉And produces an output: <br>
+🖊️ECDSA Sign `<br>`
+👉The signing algorithm takes as an input: `<br>`
+Message - ``msg`` `<br>`
+Private key - ``privateKey`` `<br>`
+👉And produces an output: `<br>`
 ``Signature - {r, s}`` := r and s are pair of integers
 
-🪜Steps: <br>
-1.Hash the message with for example SHA-256 <br>
-👉``h = SHA-256(msg)`` <br>
-2.Generate securely a random number k in the range [1…n-1] <br>
-2.1 In case of deterministic-ECDSA the value of k is HMAC derived from h + privateKey <br>
-👉``k`` derived from ``h + privateKey`` <br>
-3.Calculate the random point ``R = k * G`` and take its x-coordinate: 👉 ``r = R*x`` <br>
-4.Calculate the signature proof: <br>
+🪜Steps: `<br>`
+1.Hash the message with for example SHA-256 `<br>`
+👉``h = SHA-256(msg)`` `<br>`
+2.Generate securely a random number k in the range [1…n-1] `<br>`
+2.1 In case of deterministic-ECDSA the value of k is HMAC derived from h + privateKey `<br>`
+👉``k`` derived from ``h + privateKey`` `<br>`
+3.Calculate the random point ``R = k * G`` and take its x-coordinate: 👉 ``r = R*x`` `<br>`
+4.Calculate the signature proof: `<br>`
 
     s = k^(-1) * (h + r * privateKey) (mod n)
 
@@ -70,20 +70,20 @@ Private key - ``privateKey`` <br>
 
 ❕ECDSA signatures are 2 times longer than the signer's private key for the curve used during the signing process.
 
-🔎ECDSA Verify Signature<br>
-To verify a ECDSA signature, take an input of <br>
-👉msg<br>
-👉signature ``{r, s} ``- produced by the signing algorithm<br>
-👉``public key`` - corresponding to the signer’s ```private key```<br>
+🔎ECDSA Verify Signature`<br>`
+To verify a ECDSA signature, take an input of `<br>`
+👉msg`<br>`
+👉signature ``{r, s} ``- produced by the signing algorithm`<br>`
+👉``public key`` - corresponding to the signer’s ``private key```<br>`
 The output is: ``boolean valid || invalid signature``
 
-🪜Steps:<br>
-👉Calculate the message hash, with the same hashing function used during signing<br>
+🪜Steps:`<br>`
+👉Calculate the message hash, with the same hashing function used during signing`<br>`
 👉Calculate the modular inverse of the signature proof:
 
     s1 = s^(-1) (mod n)
 
-👉Recover the random point used during the signing:<br>
+👉Recover the random point used during the signing:`<br>`
 
     R’ = (h * s1) * G + (r * s1) * publicKey
 
@@ -100,7 +100,7 @@ The output is: ``boolean valid || invalid signature``
 
 ❗The general idea of the signature verification is to recover the point R’ using the public key and check whether it is same point R, generated randomly during the signing process.
 
-Cheatsheet<br>
+Cheatsheet
 1️.The signing encodes random ``point R`` (represented by its ``x``-coordinate only) through elliptic curve transformations using the ``private key`` and the ``message``’s ``hash`` into a ``number s``, which is the proof that the message signer knows the ``private key``. The signature ``{r, s}`` cannot reveal the private key due to the difficulty of the ``ECDLP problem``
 
 2️.The signature verification decodes the proof ``number s`` from the signature back to its original ``point R``, using the ``public key`` and the ``message’s hash`` and compares the ``x``-coordinate of the recovered ``R`` with the ``r`` value from the signature
