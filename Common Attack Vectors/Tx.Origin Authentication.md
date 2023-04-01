@@ -15,6 +15,7 @@ Can you guess where is the vulnerability?
 The vulnerability lies in the use of tx.origin in the transfer function. tx.origin refers to the address that initiated the transaction, which may not necessarily be the same as the owner's address. An attacker can exploit this vulnerability by using a contract to initiate the transaction and spoof the tx.origin to be the owner's address.
 
 Here is an example of an attack:
+
 ![Alt text](image/Tx.Origin%20Authentication/malicious__wallet_phishing.png)
 
 Now, if the owner of the Wallet contract sends a transaction with enough gas to the Attack address, it will invoke the fallback function, which in turn calls the transfer function of the Wallet contract with the parameter attacker.
