@@ -42,3 +42,22 @@ This method prevents both miners and users from frontrunning transactions, as th
 
 The ENS smart contract allowed users to send transactions whose committed data included the amount of ether they were willing to spend. Users could then send transactions of arbitrary value. During the reveal phase, users were refunded the difference between the amount sent in the
 transaction and the amount they were willing to spend.
+
+Real-World Example: ERC20
+-
+
+The ERC20 standart has a potential front-running vulnerability that comes about due to the approve function
+
+The standard specifies the approve function as:
+
+        function approve(address _spender, uint256 _value) returns (bool success)
+
+This function allows a user to permit other users to transfer tokens on their behalf.
+
+The front-running vulnerability occurs in the scenario where a user Alice approves her friend Bob to spend 100 tokens.
+
+Alice later decides that she wants to revoke Bob’s
+approval to spend, say, 100 tokens, so she creates a transaction that sets Bob’s allocation to 50 tokens. Bob, who has been carefully watching the chain, sees this transaction and builds a transaction of his own spending the 100 tokens. He puts a higher
+gasPrice on his transaction than Alice’s, so gets his transaction prioritized over hers
+
+Some implementations of approve would allow Bob to transfer his 100 tokens and then, when Alice’s transaction is committed, reset Bob’s approval to 50 tokens, in effect giving Bob access to 150 tokens.
