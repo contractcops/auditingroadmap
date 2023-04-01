@@ -6,15 +6,15 @@ Now let's go through some examples:
 
 This is a typical example of contract that is vulnerable to single function reentrancy attack
 
-![Reentrancy.png](../Common%20Attacks/images/Single-function-reentrancy.png)
+![1680345906808](image/ReentrancyAttacks__/1680345906808.png)
 
 Do you see that
 
-        balances[msg.sender] -= _amountToWithdraw;
+    balances[msg.sender] -= _amountToWithdraw;
 
 is executed after
 
-        msg.sender.call{value: _amountToWithdraw}("");
+    msg.sender.call{value: _amountToWithdraw}("");
 Where is the problem here you may ask?
 msg.sender.call will invoke the fallback function in the contract that invoke the withdraw function.
 
@@ -22,7 +22,7 @@ If some contract has the fallback function and in this function implements again
 
 Here is an example of particular attack:
 
-![Attack_Reentrancy.png](../Common%20Attacks/images/Attack_Reentrancy.png)
+![1680345915317](image/ReentrancyAttacks__/1680345915317.png)
 
 When the attacker calls the attack function in the Attack contract:
 
