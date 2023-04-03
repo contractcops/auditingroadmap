@@ -1,21 +1,23 @@
 # Function selector abuse
 
-Function selector is how we tell them smart contract which function to run. It is the first 4 bytes which we get from the functions name and it is used when calling low level functions like call on a contract and asking it to run a function.
+> The standard way of making an external function call to another contract in Solidity is to pass the function selector (name of the function), as well as the arguments (parameters) followed by it.
 
->The function selector is most probably unique for a contract. It is just 4 bytes and that is not a lot of data and thus there can exist another function which has a totally different name but same selector. But that is not that important.
+A call might look like: 
 
-Let's observe this example:
+![1680547234982](image/FunctionSelectorAbuse/1680547234982.png)
 
-![Alt text](image/Function%20selector%20abuse/how%20to%20get%20functionSelector.png)
+As seen above, the address of the external contract is used to call someFunction() where the only parameter/argument is a uint256.
 
-For example if I try to get the function selector of 
+The call is also encoded and digitally signed (with the private key and ECDSA).
 
-    "getSelector(string)"
+In place, the ABI will convert the following snippet into the bytecode as shown below:
 
-I get:
+![1680547368133](image/FunctionSelectorAbuse/1680547368133.png)
 
-    0x80a003ff
+The first 4 bytes represent the function selector (name) with the data types of the arguments for that function. In the above example, this will be someFunction(uint256) which will be represented as 0xf31a6969 in bytecode.
 
-All ABI-compliant contracts on Ethereum begin by looking at these bytes of the calldata and jump to the corresponding function body.
+If the function selector and type is modifiable by the public, an attacker can brute force a certain selector until he hits a function that executes some sensitive logic. This is exactly what happened with the Poly network hack (multi-chain), where a hacker bruteforced an external function and managed to become the "owner" of the Ethereum part of Poly. 
 
-If a contract performs a call to an external contract, and the user can influence any part of the method signature (such as the function name, or its type), they can call any function on the external contract, simply by manipulating the string until a selector matching the desired one is found.
+610 million in USD, BTC and ether were lost.
+
+[https://research.kudelskisecurity.com/2021/08/12/the-poly-network-hack-explained/](https://research.kudelskisecurity.com/2021/08/12/the-poly-network-hack-explained/)
