@@ -2,7 +2,6 @@
 
 Miners have the ability to adjust timestamps slightly, which can prove to be dangerous if block timestamps are used incorrectly in smart contracts.
 
-
 The vulnerability
 -
 
@@ -19,6 +18,6 @@ Preventive techniques
 
 Block timestamps should not be used for entropy or generating random numbers.
 
-me-sensitive logic is sometimes required; e.g., for unlocking contracts (time-locking), completing an ICO after a few weeks, or enforcing expiry dates.
+Time-sensitive logic is sometimes required; e.g., for unlocking contracts (time-locking), completing an ICO after a few weeks, or enforcing expiry dates.
 
 This can be unnecessary if contracts aren’t particularly concerned with miner manipulations of the block timestamp, but it is something to be aware of when developing contracts.
