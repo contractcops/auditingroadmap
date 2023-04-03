@@ -19,3 +19,17 @@ Addresses linked to a contract account, however, can be checked and validated wh
 ![1680515788027](image/AccountExistenceCheck/1680515788027.png)
 
 What this snippet of code represents is a simple inline assembly section that checks whether the length of the bytecode of a given address is bigger than 0. This way, before sending a transaction, we can succesfully predict whether the address is a contract address or not.
+
+<h3> Preventative measures
+
+In order to prevent unexpected logic execution or the loss of ether/data, low level call functions should always be checked for their return values. Addresses can't be succesfully predicted whether they are actually linked to an existing account, except for the workaround with checking bytecode for a smart contract account.
+
+> Important: Do not use the EXTCODESIZE modifier to check whether an address is of an EOA or Contract address
+
+Let's take a loot at the following bad example of what a modifier might look like:
+
+![1680517166559](image/AccountExistenceCheck/1680517166559.png)
+
+We can see that the purpose of this is to check whether the size is bigger than zero. We then assume that if it is, it's a contract account and if it isnt - it should be an EOA. 
+
+> As you might have already noticed, this is really bad practice, as the modifier does not take into account that all addresses are pre-determined.
