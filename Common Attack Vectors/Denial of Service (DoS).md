@@ -2,6 +2,11 @@
 
 Although this category is very broad, it consists of attacks that where users can render a contract inoperable for a period of time, or in some cases permanently. This can trap ether in these contracts forever.
 
+There are three types of DoS attacks in smart contracts:
+1. Looping through externally manipulated mappings or arrays
+2. Owner operations
+3. Progressing state based on external calls
+
 For example:
 
 Looping through externally manipulated mappings or arrays
