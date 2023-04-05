@@ -6,7 +6,7 @@ Now let's go through some examples:
 
 This is a typical example of contract that is vulnerable to single function reentrancy attack
 
-![1680345906808](image/ReentrancyAttacks__/1680345906808.png)
+![Alt text](image/ReentrancyAttacks__/single-function%20reentrancy.png)
 
 Do you see that
 
@@ -22,7 +22,7 @@ If some contract has the fallback function and in this function implements again
 
 Here is an example of particular attack:
 
-![1680345915317](image/ReentrancyAttacks__/1680345915317.png)
+![Alt text](image/ReentrancyAttacks__/1680345906808.png)
 
 When the attacker calls the attack function in the Attack contract:
 
@@ -30,3 +30,54 @@ When the attacker calls the attack function in the Attack contract:
 2. Immediately withdraw the ether
 3. In the fallback function in the Attack contract again invokes the withdraw function
 4. Repeat that process until the balance of the EtherStore is equal >= 1 ether.
+
+Prevention
+-
+
+Always use *checks-effects-interactions pattern* or use mutex mechanism but keep in mind that using such mechanism, you have to be aware that such solution doesn't prevent Cross function reentrancy.
+
+Cross function reentrancy
+-
+Preventing only the state variables in one function that make external calls isn't enough because an attacker is able to perform reentrancy attack on two different functions that share the same state.
+This is cross function reentrancy.
+
+![Alt text](image/ReentrancyAttacks__/nonReentrantCrossReentrancy.png)
+
+As you can see here the withdraw function is implementing noReentrant modifier but that doesn't mean that it isn't vulnerable to reentrancy attacks
+
+Prevention
+-
+
+Always use *checks-effects-interactions pattern*
+and place state variables manipulation
+
+Here is an example:
+
+![Alt text](image/ReentrancyAttacks__/cross-function-reentrancy.png)
+
+Cross-Contract reentrancy
+-
+
+Cross-Contract reentrancy is very similar to cross-function reentrancy, except the fact that the functions in a particular contract may not be subject to reentrancy attack but the state variables used in them are updated insecurely in other contracts.
+
+Read Only reentrancy
+-
+
+Read-only reentrancy occurs where a view function is called and reentered into during the execution of another function that modifies the state of that contract.
+
+>This could potentially lead to stale data since what is read in memory during function invocation and what is recorded in storage has yet to be finalized and may be out of sync.
+
+Let's see an example:
+
+Firstly, the Hack contract will call A contract.
+Then contract A will call back in contract Hack.
+
+> At this moment the first call (Hack->A) hasn't yet finished.
+
+And while it is not finished Hack contract is calling Target contract.
+
+Then, the Target contract will read some state from contract A.
+
+After reading from contract A, the step 3 finishes, then the execution of step 2 and lastly the first execution(step) also finishes.
+
+![Alt text](image/ReentrancyAttacks__/reentrancy_attack.png)
