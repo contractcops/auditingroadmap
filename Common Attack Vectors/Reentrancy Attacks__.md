@@ -31,6 +31,10 @@ When the attacker calls the attack function in the Attack contract:
 3. In the fallback function in the Attack contract again invokes the withdraw function
 4. Repeat that process until the balance of the EtherStore is equal >= 1 ether.
 
+Prevention
+-
+
+Always use *checks-effects-interactions pattern* or use mutex mechanism but keep in mind that using such mechanism, you have to be aware that such solution doesn't prevent Cross function reentrancy.
 
 Cross function reentrancy
 -
