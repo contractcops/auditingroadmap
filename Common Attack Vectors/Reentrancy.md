@@ -2,12 +2,14 @@
 
 > Reentrancy is when an attacker is able to achieve race condition and repeat an action (that he's not supposed to) multiple times consequently.
 
+> In the context of Ethereum, a reentrancy attack is where an attacker is able to re-enter (repeat) a state modifying function so that an inconsistent state is used to perform malicious state.
+
 The easiest way to spot a contract that's vulnerable to re-entrancy is by looking for important logic that occurs after the following functions are used:
 
 - call()
 - send()
 
-> Reentrancy mainly occurs when a contract sends ether to an unknown contract. 
+> Reentrancy mainly occurs when a contract sends ether to an unknown contract.
 
 > The reason behind why this vulnerability is possible when using the above functions is because of how Solidity and the EVM handle payments from one contract to another.
 
@@ -39,9 +41,9 @@ We then have the StartAttack() function which does the following things:
 - Deposit 1 ether
 - Withdraw 1 ether right after
 
-What happens when those two are exectued consequently is that in the Bank contract, the balance of the attacker becomes 1 ether. Right after that, he requests a withdrawal and passes the requirement for him to have that amount. 
+What happens when those two are exectued consequently is that in the Bank contract, the balance of the attacker becomes 1 ether. Right after that, he requests a withdrawal and passes the requirement for him to have that amount.
 
-> Ether is then sent to the attack contract throught the payable fallback function, where it checks whether the balance of the contract is bigger than 1 ether. If that condition passes, the attacker is able to withdraw as much ether as there is in the contract by calling Withdraw() once again. 
+> Ether is then sent to the attack contract throught the payable fallback function, where it checks whether the balance of the contract is bigger than 1 ether. If that condition passes, the attacker is able to withdraw as much ether as there is in the contract by calling Withdraw() once again.
 
 This is possible because of race condition. The Bank contract is never able to decrement the attacker's balance and he drains all of the ether stored.
 
@@ -55,6 +57,6 @@ This is possible because of race condition. The Bank contract is never able to d
 
 Other resources to look into for re-entrancy fallback functions is:
 
->  Cross-function reentrancy
+> Cross-function reentrancy
 >
->  Cross-contract reentrancy
+> Cross-contract reentrancy
