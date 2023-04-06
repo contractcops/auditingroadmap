@@ -129,4 +129,42 @@ And here comes the vulnerability.
 Vulnerability
 -
 
-After we now have the two points P2 and P, we can compute a signature proof value for both of them hence we can make a double spending from a contract
+After we now have the two points P2 and P, we can compute a signature proof value for both of them hence we can make a double spending from a contract.
+
+Prevention
+-
+
+Before I tell you how to prevent this, you know that we found the *s value* (the signature proof) for the point P. Well now an attacker could do the same thing but for the other point P2. 
+
+Essentially find the signature proof ot the point P2.
+
+So this can be done by computing the *-s*
+
+And since we are working in Zn, we can simply compute n-s and we have our attack s.
+
+![Alt text](image/Signature%20Malleability/attackSignatureProof.png)
+
+And now after this exhausting load of information, how do we prevent this situation from occurring?
+
+    The most widely accepted fix is to limit the s value to the lower bound.
+
+There are two s values that can be used to create a valid signature: *s* and *n-s*.
+
+Therefore there is one
+
+    s > n/2 
+
+and another that is:
+
+    s < n/2
+
+We have to limit the signature to use only the *s* from a single side.
+
+Let's see an example:
+
+![Alt text](image/Signature%20Malleability/openZeppelinPreventionOfSignatureMalleability.png)
+
+This Open Zeppelin ECDSA library prevents this vulnerability from occuring by limiting *s* value to the lower bound.
+
+Here is a link to the library:
+https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/cryptography/ECDSA.sol
