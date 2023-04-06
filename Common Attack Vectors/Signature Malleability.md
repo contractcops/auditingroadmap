@@ -100,3 +100,33 @@ And if I can simplify this for you:
 
     s = ((messageHash + P's x coordinate*your private key) + k^(-1)) (mod n)
 
+And there you go, now we have the *r* and *s* values
+
+But now, let's return for a bit to the *r* value, like I said it was the x coordinate of the temporary public key.
+
+Let's visualize this point on the curve now:
+
+![Alt text](image/Signature%20Malleability/pointPonTheCurve.png)
+
+But if you think about it, the point P isn't the only point on the curve that has the same x'coordinate.
+
+If we draw stright line from the x coordinate of point P up to the other side of the EC, we will observe that this straight line will intersect the EC at the exact x coordinate as point P.
+
+So in a nutshell we will have other point P, let's call it P2 that has the same x coordinate, but with other y coordinate.
+
+Let's take a look:
+
+![Alt text](image/Signature%20Malleability/pointP2onTheCurve.png)
+
+And here comes variable *v* in to the game.
+
+The ECDSA has to know which point was used when creating the signature proof *s* value so that the signer address can be recovered.
+
+This is where the value *v* comes in to play, it simply acts as an indicator for which side of the EC the actual public key that was used is on.
+
+And here comes the vulnerability.
+
+Vulnerability
+-
+
+After we now have the two points P2 and P, we can compute a signature proof value for both of them hence we can make a double spending from a contract
