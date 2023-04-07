@@ -54,8 +54,6 @@ In the scenario where a contract is created with CREATE2 and selfdestruct() is c
 Let's look at some code!
 -
 
-*The code is from the website: https://docs.celo.org/blog/tutorials/solidity-vulnerabilities-signature-replay-attack*
-
 ![Alt text](image/Signature%20Replay/signatureReplayVulnerable.png)
 
 We fisrt import the ECDSA.sol from OpenZeppelin
@@ -160,3 +158,8 @@ We can do this by including the address of the contract inside the getTxHash() f
 
 So whenever the admins sign the txHash, they sign a hash unique to the contract.
 
+The full code for the contract protected against both forms of replay attack can be found below:
+
+![Alt text](image/Signature%20Replay/signatureReplayNonceAddress.png)
+
+*The code is from the website: https://docs.celo.org/blog/tutorials/solidity-vulnerabilities-signature-replay-attack*
