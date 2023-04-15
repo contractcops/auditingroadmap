@@ -10,15 +10,15 @@ It is possible to authenticate the sender without revealing the private key.
 
 ![ECDSA](../images/EC%20and%20ECDSA/ECDSA.png)
 
-👉It is a digital signature scheme, based on the elliptic-curve cryptography(ECC).
+- It is a digital signature scheme, based on the elliptic-curve cryptography(ECC).
 
-👉relies on the math of the cyclic groups of elliptic curves over finite fields and on the difficulty of the ECDLP problem (elliptic-curve discrete logarithm problem)
+- relies on the math of the cyclic groups of elliptic curves over finite fields and on the difficulty of the ECDLP problem (elliptic-curve discrete logarithm problem)
 
-👉The ECDSA sign / verify algorithm relies on EC point multiplication
+- The ECDSA sign / verify algorithm relies on EC point multiplication
 
-👉ECDSA keys and signatures are shorter than in RSA for the same security level
+- ECDSA keys and signatures are shorter than in RSA for the same security level
 
-👉256-bit ECDSA signature has the same security strength like 3072-bit RSA signature
+- 256-bit ECDSA signature has the same security strength like 3072-bit RSA signature
 
 Elliptic curves, used in cryptography, define:
 
@@ -31,27 +31,28 @@ The ECDSA key-pair consists of: <br>
 Private key (integer): privateKey <br>
 Public key (EC point): publicKey = privateKey * G
 <br>
-👉The private key is generated as a random number in the range of [1…n-1].
+The private key is generated as a random number in the range of [1…n-1].
 
-👉The public key is a point on the elliptic curve, calculate by the EC point multiplication: `<br>`
-``publicKey = privateKey * G ``, in other words: the private key, multiplied by the generator point G.
+- The public key is a point on the elliptic curve, calculate by the EC point multiplication: `<br>`
+  ``publicKey = privateKey * G ``, in other words: the private key, multiplied by the generator point G.
 
-👉The public key EC point {x, y} can be compressed to just one of the coordinates + 1 bit
+- The public key EC point {x, y} can be compressed to just one of the coordinates + 1 bit
 
 E.g. -> for the ``secp256k1`` curve:
 The private key is 256-bit integer (32 bytes)
 The compressed public key is 257-bit integer (~33 bytes)
 
 🖊️ECDSA Sign `<br>`
-👉The signing algorithm takes as an input: `<br>`
-Message - ``msg`` `<br>`
-Private key - ``privateKey`` `<br>`
-👉And produces an output: `<br>`
-``Signature - {r, s}`` := r and s are pair of integers
 
-🪜Steps: `<br>`
-1.Hash the message with for example SHA-256 `<br>`
-👉``h = SHA-256(msg)`` `<br>`
+- The signing algorithm takes as an input: `<br>`
+  Message - ``msg`` `<br>`
+  Private key - ``privateKey`` `<br>`
+  👉And produces an output: `<br>`
+  ``Signature - {r, s}`` := r and s are pair of integers
+
+Steps: `<br>`
+1.Hash the message with for example SHA-256 `<br>sss`
+``h = SHA-256(msg)`` `<br>`
 2.Generate securely a random number k in the range [1…n-1] `<br>`
 2.1 In case of deterministic-ECDSA the value of k is HMAC derived from h + privateKey `<br>`
 👉``k`` derived from ``h + privateKey`` `<br>`
@@ -70,15 +71,14 @@ Private key - ``privateKey`` `<br>`
 
 ❕ECDSA signatures are 2 times longer than the signer's private key for the curve used during the signing process.
 
-🔎ECDSA Verify Signature`<br>`
+🔎ECDSA Verify Signature `<br>`
 To verify a ECDSA signature, take an input of `<br>`
-👉msg`<br>`
-👉signature ``{r, s} ``- produced by the signing algorithm`<br>`
-👉``public key`` - corresponding to the signer’s ``private key```<br>`
-The output is: ``boolean valid || invalid signature``
+👉msg `<br>`
+👉signature ``{r, s} ``- produced by the signing algorithm `<br>`
+👉``public key`` - corresponding to the signer’s ``private key```<br>` The output is: ``boolean valid || invalid signature``
 
 🪜Steps:`<br>`
-👉Calculate the message hash, with the same hashing function used during signing`<br>`
+👉Calculate the message hash, with the same hashing function used during signing `<br>`
 👉Calculate the modular inverse of the signature proof:
 
     s1 = s^(-1) (mod n)

@@ -181,7 +181,7 @@ When a transaction is made with value included with it, it does not matter wheth
 
 <h4> Raw transaction creation
 
-EIP-155 makes it impossible for a trans‐
+EIP-155 makes it impossible for a transgas‐
 action to be replayed on another chain, because the signature’s validity depends on
 the chain identifier
 

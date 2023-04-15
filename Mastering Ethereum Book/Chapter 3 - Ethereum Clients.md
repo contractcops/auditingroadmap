@@ -1,4 +1,4 @@
-# Ethereum clients
+# aEthereum clients
 
 Ethereum client is a software application that implements the ethereum specification and communicates with other clients with the peer-to-peer network, mentioned in Chapter 2.
 
@@ -23,7 +23,7 @@ In order to run a node, a copy of the entire blockchain must be downloaded. Curr
 
 > Instead of getting the full-sized blockchain data, testnets can be used. The issue is, however, that real money can't be used. Furthermore, not all problems that may occur in the real blockchain can be tested (security i.e).
 
-An alternative to this is to launch a single-instance private blockchain. 
+An alternative to this is to launch a single-instance private blockchain.
 
 > Ganache (testrpc) is one of the most popular blockchain simulations
 
