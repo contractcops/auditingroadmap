@@ -35,11 +35,13 @@ The real processing that happens is more of an endless competition between all m
 Cryptographic hashes
 --------------------
 
-Properties: `<br>`
-1.hard to fake `<br>`
-2.easy to validate `<br>`
-In other words hash is like digital signature `<br>`
-1.Hard to produce, making it impossible to create (fake) a valid signature without first having access to the original data; `<br>`
+Properties:
+1. hard to fake
+2. easy to validate
+In other words hash is like digital signature
+
+1.Hard to produce, making it impossible to create (fake) a valid signature without first having access to the original data;
+
 2.Trivial to verify. So that anyone can quickly validate data.
 
 <br>
@@ -58,13 +60,13 @@ Each block has a hash, too. And that hash needs to follow certain rules.
 
 👉This hash can’t be just any hash tough. The blockchain imposes some rules on it. Bitcoin, for example, requires the hash to start with a certain number of leading zeros. The actual amount of zeros required is called the network’s difficulty, and it’s a number that is adjusted every few blocks.
 
-👉And because each and every node is doing these hard computations, you now know that they `<b>`prooved `</b>` that they've done the work without actually checking yourself. In other words you are trusting them and agree with the validations of the nodes.
+👉And because each and every node is doing these hard computations, you now know that they **prooved** that they've done the work without actually checking yourself. In other words you are trusting them and agree with the validations of the nodes.
 
 👉Couple this with the fact that hashes are, for all intents and purposes, randomly generated and unguessable, and miners have only one way to produce different hashes: brute force. They keep trying over and over to generate new hashes, until they find one that fulfils the requirement.
 
 👉Since the same block always generates the same hash, they need to change it slightly for every new attempt. This is often done by adding a random number within the block’s data. The only purpose of this number is for miners to change it in order to be able to make different blocks, and therefore, different hashes.
 
-👉The better your hardware, the more hashes you can produce. That’s called your `<b>`Hash Rate `</b>`
+👉The better your hardware, the more hashes you can produce. That’s called your **Hash Rate**
 
 👉Since this process is essentially random, having slower hardware still gives you a small chance at preventing more powerful miners from getting 100% of the blocks.
 
