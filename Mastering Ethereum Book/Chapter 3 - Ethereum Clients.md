@@ -1,4 +1,4 @@
-# aEthereum clients
+# Ethereum clients
 
 Ethereum client is a software application that implements the ethereum specification and communicates with other clients with the peer-to-peer network, mentioned in Chapter 2.
 
