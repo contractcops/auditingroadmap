@@ -1,6 +1,6 @@
 # ERC20
 
-ERC-20 is the technical standard for `<b>`fungible tokens `</b>` created using the Ethereum blockchain. A fungible token is interchangeable wth another token- where the well-known `<b>`non-fungible `</b>` tokens (NFTs) are not interchangeable.
+ERC-20 is the technical standard for **fungible tokens** created using the Ethereum blockchain. A fungible token is interchangeable wth another token- where the well-known **non-fungible** tokens (NFTs) are not interchangeable.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ERC-20 allows developers to create smart-contract-enabled tokens that can be used with other products and services. These tokens are a representation of an:
@@ -15,8 +15,8 @@ ERC-20 allows developers to create smart-contract-enabled tokens that can be use
 ERC-20 History
 --------------
 
-There was a problem with `<b>`interoperability `</b>` Each token contract can be completely different from the other. So if you want your token to be avaible on an exchange, the exchange has to write custom code to talk to your contract and allow people to trade. `<br>`
-`<br>`
+There was a problem with interoperability. Each token contract can be completely different from the other. So if you want your token to be avaible on an exchange, the exchange has to write custom code to talk to your contract and allow people to trade. 
+
 The same thing goes for wallet providers, supporting hundreds of tokens will be very complex and very time consuming, so that's why the community proposed a standart called ERC-20.
 
 ERC-20 Contents
@@ -42,7 +42,8 @@ The following functions are optional and are not required to be included, but th
 2. Its symbol (optional)
 3. Decimal points to use (optional)
 
-❗Warning: `<br>`
+❗Warning:
+
 "Token" and "Cryptocurrency" are often used interchangeably; all cryptocurrencies are tokens, but not all tokens are cryptocurrencies. Tokens often represent assets and rights that are external to a blockchain. Token, in the context of ``ERC-20`` compliance, simply means a blockchain representation of something that meets the standards set by the Ethereum community to be considered a smart contract standard-compliant token.
 
 What Does ERC-20 Mean?
