@@ -44,8 +44,6 @@ In Solidity, we are able to perform an external call to a contract with the foll
 
 ````
 (bool success,) = someContractAddress.call{value:123}(abi.encodeWithSignature("test(uint256)", 123))
-
-```
 ````
 
 With the above snippet of code, we are doing the following:
@@ -56,7 +54,6 @@ Delegatecall has almost the exact same syntax, with the important difference of 
 
 ````
 (bool success,) = someContractAddress.delegatecall{value:123}(abi.encodeWithSignature("test(uint256)", 123))
-```
 ````
 
 Now, given all of this, it is not trivial to come to the conclusion that if we can somehow change the "someContractAddress" and the encoded call data that is being sent, we can achieve modularity and extend our proxy contract.
