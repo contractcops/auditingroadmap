@@ -1,5 +1,8 @@
 # Auditor Roadmap
 An open source repository, dedicated towards creating a journal of free materials for learning smart contract development & auditing.
+
+![Alt text](Auditor%20Mindmap.jpg)
+
 </br>
 The repository currently contains a summary of:
 
