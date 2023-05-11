@@ -1,4 +1,4 @@
-# eth-materials
+# Auditor Roadmap
 An open source repository, dedicated towards creating a journal of free materials for learning smart contract development & auditing.
 </br>
 The repository currently contains a summary of:
